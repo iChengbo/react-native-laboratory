@@ -4037,7 +4037,7 @@ lodash.unescape@4.0.1:
   resolved "https://registry.npm.taobao.org/lodash.unescape/download/lodash.unescape-4.0.1.tgz#bf2249886ce514cda112fae9218cdc065211fc9c"
   integrity sha1-vyJJiGzlFM2hEvrpIYzcBlIR/Jw=
 
-lodash@^4.17.10, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.5, lodash@^4.3.0:
+lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.5, lodash@^4.3.0:
   version "4.17.15"
   resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha1-tEf2ZwoEVbv+7dETku/zMOoJdUg=
@@ -5143,6 +5143,11 @@ react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-is
   resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha1-LMD+D7p0LZf9UnxCoTvsTusGJBw=
 
+react-lifecycles-compat@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.npm.taobao.org/react-lifecycles-compat/download/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
+  integrity sha1-TxonOv38jzSIqMUWv9p4+HI1I2I=
+
 react-native-gesture-handler@^1.5.3:
   version "1.5.3"
   resolved "https://registry.npm.taobao.org/react-native-gesture-handler/download/react-native-gesture-handler-1.5.3.tgz#191b44701fab7ba54c27a2438cb5eaa252666e66"
@@ -5168,7 +5173,7 @@ react-native-safe-area-context@^0.6.2:
   resolved "https://registry.npm.taobao.org/react-native-safe-area-context/download/react-native-safe-area-context-0.6.2.tgz#d467ac8a953426bfbb6d8f417222b0dc3952be7a"
   integrity sha1-1GesipU0Jr+7bY9BciKw3DlSvno=
 
-react-native-safe-area-view@^0.14.1:
+react-native-safe-area-view@^0.14.1, react-native-safe-area-view@^0.14.6:
   version "0.14.8"
   resolved "https://registry.npm.taobao.org/react-native-safe-area-view/download/react-native-safe-area-view-0.14.8.tgz#ef33c46ff8164ae77acad48c3039ec9c34873e5b"
   integrity sha1-7zPEb/gWSud6ytSMMDnsnDSHPls=
@@ -5188,6 +5193,20 @@ react-native-screens@^2.0.0-alpha.23:
   integrity sha1-0WRi62zPEazv3Hw/FW1xgpLPSTc=
   dependencies:
     debounce "^1.2.0"
+
+react-native-tab-view@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.npm.taobao.org/react-native-tab-view/download/react-native-tab-view-2.11.0.tgz#2e57d1f617ccc88c7f452708804f3409f880b700"
+  integrity sha1-LlfR9hfMyIx/RScIgE80CfiAtwA=
+
+react-native-vector-icons@^6.6.0:
+  version "6.6.0"
+  resolved "https://registry.npm.taobao.org/react-native-vector-icons/download/react-native-vector-icons-6.6.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-native-vector-icons%2Fdownload%2Freact-native-vector-icons-6.6.0.tgz#66cf004918eb05d90778d64bd42077c1800d481b"
+  integrity sha1-Zs8ASRjrBdkHeNZL1CB3wYANSBs=
+  dependencies:
+    lodash "^4.0.0"
+    prop-types "^15.6.2"
+    yargs "^13.2.2"
 
 react-native@0.61.5:
   version "0.61.5"
@@ -5224,6 +5243,11 @@ react-native@0.61.5:
     stacktrace-parser "^0.1.3"
     whatwg-fetch "^3.0.0"
 
+react-navigation-drawer@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.npm.taobao.org/react-navigation-drawer/download/react-navigation-drawer-2.3.3.tgz?cache=0&sync_timestamp=1572422974064&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-navigation-drawer%2Fdownload%2Freact-navigation-drawer-2.3.3.tgz#d7e607d5e10f2b3c40ab7dc9720228ce3f888a0f"
+  integrity sha1-1+YH1eEPKzxAq33JcgIozj+Iig8=
+
 react-navigation-stack@^2.0.13:
   version "2.0.13"
   resolved "https://registry.npm.taobao.org/react-navigation-stack/download/react-navigation-stack-2.0.13.tgz#fa3ce5a2c3ce1d504e936f81575d0b8efdc77e2f"
@@ -5231,6 +5255,16 @@ react-navigation-stack@^2.0.13:
   dependencies:
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
+
+react-navigation-tabs@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.npm.taobao.org/react-navigation-tabs/download/react-navigation-tabs-2.7.0.tgz#68505910164a51c44710f835def8fe29360f346a"
+  integrity sha1-aFBZEBZKUcRHEPg13vj+KTYPNGo=
+  dependencies:
+    hoist-non-react-statics "^3.3.0"
+    react-lifecycles-compat "^3.0.4"
+    react-native-safe-area-view "^0.14.6"
+    react-native-tab-view "^2.11.0"
 
 react-navigation@^4.0.10:
   version "4.0.10"
@@ -6650,7 +6684,7 @@ yargs@^12.0.5:
     y18n "^3.2.1 || ^4.0.0"
     yargs-parser "^11.1.1"
 
-yargs@^13.3.0:
+yargs@^13.2.2, yargs@^13.3.0:
   version "13.3.0"
   resolved "https://registry.npm.taobao.org/yargs/download/yargs-13.3.0.tgz?cache=0&sync_timestamp=1577940993299&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fyargs%2Fdownload%2Fyargs-13.3.0.tgz#4c657a55e07e5f2cf947f8a366567c04a0dedc83"
   integrity sha1-TGV6VeB+Xyz5R/ijZlZ8BKDe3IM=
