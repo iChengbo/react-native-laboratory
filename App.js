@@ -188,31 +188,9 @@ const navOptionsHandler = (navigation) => ({
   headerShown: false
 })
 
-const HomeStack = createStackNavigator({
-  Home: {
-    screen: Home,
-    navigationOptions: navOptionsHandler
-  },
-  HomeDetail: {
-    screen: HomeDetail,
-    navigationOptions: navOptionsHandler
-  }
-})
-
-const SearchStack = createStackNavigator({
-  Search: {
-    screen: Search,
-    navigationOptions: navOptionsHandler
-  },
-  SearchDetail: {
-    screen: SearchDetail,
-    navigationOptions: navOptionsHandler
-  }
-})
-
 const MainTabs = createBottomTabNavigator({
   Home: {
-    screen: HomeStack,
+    screen: Home,
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => (
@@ -225,7 +203,7 @@ const MainTabs = createBottomTabNavigator({
     }
   },
   Search: {
-    screen: SearchStack,
+    screen: Search,
     navigationOptions: {
       tabBarLabel: 'Search',
       tabBarIcon: ({ tintColor }) => (
@@ -250,6 +228,14 @@ const MainStack = createStackNavigator({
   },
   Profile: {
     screen: Profile,
+    navigationOptions: navOptionsHandler
+  },
+  HomeDetail: {
+    screen: HomeDetail,
+    navigationOptions: navOptionsHandler
+  },
+  SearchDetail: {
+    screen: SearchDetail,
     navigationOptions: navOptionsHandler
   }
 }, {
