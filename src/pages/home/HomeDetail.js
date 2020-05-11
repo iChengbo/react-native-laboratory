@@ -2,15 +2,17 @@ import React from 'react';
 import {
     View,
     Text,
-    Dimensions,
     StyleSheet,
     FlatList,
     ScrollView
 } from 'react-native';
 
 import CustomHeader from '../../components/common/CustomeHeader';
+import { GridView1, GridView2, GridView3 } from '../../components/common/GridView';
 
-import { fillArrayForUnite } from '../../utils/ArrayFunctions'
+import { fillArrayForUnite } from '../../utils/ArrayFunctions';
+
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from '../../constants/layout';
 
 let DATA = [];
 DATA = [{ key: '1', title: '1' }, { key: '2', title: '2' }];
@@ -20,7 +22,6 @@ DATA = [{ key: '1', title: '1' }, { key: '2', title: '2' }, { key: '3', title: '
 // DATA = [{ key: '1', title: '1' }, { key: '2', title: '2' }, { key: '3', title: '3' }, { key: '4', title: '4' }, { key: '5', title: '5' }, {key: '6', title: '6' }];
 
 const NUM_COLUMNS = 3;
-const { height, width } = Dimensions.get('window');
 
 /**
  * 头部标题
@@ -29,11 +30,25 @@ const { height, width } = Dimensions.get('window');
 const DemoHeader = (props) => {
     const { title } = props;
     return (
-        <View style={{ height: 50, backgroundColor: '#999', zIndex: 2, justifyContent: 'center', paddingLeft: 15 }}>
-            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{title}</Text>
+        <View style={titleStyle._titleWrap}>
+            <Text style={titleStyle._titleText}>{title}</Text>
         </View>
     )
 }
+
+const titleStyle = StyleSheet.create({
+    _titleWrap: {
+        height: 50,
+        zIndex: 2,
+        justifyContent: 'center',
+        paddingLeft: 15,
+        // backgroundColor: 'red'
+    },
+    _titleText: {
+        fontWeight: 'bold',
+        fontSize: 18,
+    }
+})
 
 /**
  * 实现九宫格布局
@@ -44,43 +59,44 @@ const DemoHeader = (props) => {
 class HomeDetail extends React.Component {
     _renderItem = ({ item, index }) => {
         return (
-            <View style={styles._demoItem2}>
+            <View style={styles._demoItem}>
                 <Text>{item.title}</Text>
             </View>
         )
     }
     render() {
-        const filledData = fillArrayForUnite(DATA, NUM_COLUMNS, { _isFalse: true })
+        // const filledData = fillArrayForUnite(DATA, NUM_COLUMNS, { _isFalse: true })
         return (
             <View style={{ flex: 1 }}>
-                <CustomHeader title='HomeDetail' isHome={false} navigation={this.props.navigation} />
+                <CustomHeader title='栈格布局' isHome={false} navigation={this.props.navigation} />
                 <ScrollView style={{ flex: 1 }}>
-                    <DemoHeader title={'九宫格方式1'}></DemoHeader>
-                    <View style={styles._demoContainer}>
-                        <View style={styles._demoWraper1}>
-                            {filledData.map((item, index) => {
-                                if (item._isFalse) {
-                                    return <View key={Math.random()} style={[styles._demoItem1, { backgroundColor: 'transpranter' }]}></View>
-                                }
-                                return (
-                                    <View key={item.key} style={styles._demoItem1}>
-                                        <Text>{item.title}</Text>
-                                    </View>
-                                )
-                            })}
-                        </View>
-                    </View>
-
-                    <DemoHeader title={'九宫格方式2'}></DemoHeader>
-                    <Text>稍等片刻</Text>
-                    <DemoHeader title={'九宫格方式3'}></DemoHeader>
-                    <FlatList
-                        style={styles._demoWraper2}
-                        data={filledData}
-                        keyExtractor={(item, index) => item.key}
+                    <DemoHeader title={'View + Dimensions'}></DemoHeader>
+                    <GridView1
                         numColumns={NUM_COLUMNS}
+                        lineSpaceDistance={10}
+                        itemSpaceDistance={10}
+                        edgeSpaceDistance={15}
+                        data={DATA}
                         renderItem={this._renderItem}
-                    ></FlatList>
+                    ></GridView1>
+                    <DemoHeader title={'View + flex'}></DemoHeader>
+                    <GridView2
+                        numColumns={NUM_COLUMNS}
+                        lineSpaceDistance={10}
+                        itemSpaceDistance={10}
+                        edgeSpaceDistance={15}
+                        data={DATA}
+                        renderItem={this._renderItem}
+                    ></GridView2>
+                    <DemoHeader title={'利用 FlatList'}></DemoHeader>
+                    <GridView3
+                        numColumns={NUM_COLUMNS}
+                        lineSpaceDistance={10}
+                        itemSpaceDistance={10}
+                        edgeSpaceDistance={15}
+                        data={DATA}
+                        renderItem={this._renderItem}
+                    ></GridView3>
                 </ScrollView>
             </View>
         );
@@ -88,39 +104,11 @@ class HomeDetail extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    _demoContainer: {
-        width: width,
-        backgroundColor: 'transparent',
-        paddingHorizontal: 15,
-    },
-    // 方式1
-    _demoWraper1: {
-        marginTop: -10,
-        // backgroundColor: '#fff',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-    },
-    _demoItem1: {
-        marginTop: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: (width - 30 - 20) / 3,
-        width: (width - 30 - 20) / NUM_COLUMNS,
-        backgroundColor: 'blue',
-    },
-    _demoWraper2: {
-        marginTop: -10,
-        marginLeft: 10,
-        marginRight: 10,
-    },
-    _demoItem2: {
+    _demoItem: {
         flex: 1,
-        height: (width - 30 - 20) / 3,
+        height: (SCREEN_WIDTH - 30 - 20) / 3,
+        width: '100%',
         backgroundColor: 'blue',
-        marginLeft: 5,
-        marginRight: 5,
-        marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center'
     }
