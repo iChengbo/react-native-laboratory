@@ -1,8 +1,8 @@
 /*
  * @Author: iChengbo
  * @Date: 2020-05-11 22:24:26
- * @LastEditors: xiechengbo
- * @LastEditTime: 2020-05-26 21:20:42
+ * @LastEditors: iChengbo
+ * @LastEditTime: 2020-05-26 21:22:30
  * @FilePath: /RNLaboratory/src/components/common/GridView.js
  */
 import React, { PureComponent } from 'react';
@@ -53,7 +53,7 @@ export class GridView2 extends PureComponent {
             lineSpaceDistance = 0,
             itemSpaceDistance = 0,
             edgeSpaceDistance = 0,
-            keyExtractor = (item, index) => { return String(index) },
+            keyExtractor = (item, index) => String(index),
         } = this.props;
         const filledData = fillArrayForUnite(data, numColumns, { _isFalse: true });
         // 行数
