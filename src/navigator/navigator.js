@@ -24,6 +24,10 @@ import Search from '../pages/Search';
 import HomeDetail from '../pages/home/HomeDetail';
 import SearchDetail from '../pages/search/SearchDetail';
 
+// demo 相关页面
+import DemoIndex from '../pages/demo/index';
+import GridViewDemo from '../pages/demo/GridViewDemo';
+
 export const MainTabs = createBottomTabNavigator({
     Home: {
         screen: Home,
@@ -77,7 +81,15 @@ export const MainStack = createStackNavigator({
     SearchDetail: {
         screen: SearchDetail,
         navigationOptions: navOptionsHandler
-    }
+    },
+    DemoIndex: {
+        screen: DemoIndex,
+        navigationOptions: navOptionsHandler
+    },
+    GridViewDemo: {
+        screen: GridViewDemo,
+        navigationOptions: navOptionsHandler
+    },
 }, {
     initialRouteName: 'Main'
 });
