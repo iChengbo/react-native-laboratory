@@ -1,17 +1,15 @@
 /*
  * @Author: iChengbo
  * @Date: 2020-05-11 22:24:26
- * @LastEditors: iChengbo
- * @LastEditTime: 2020-05-12 00:01:07
+ * @LastEditors: xiechengbo
+ * @LastEditTime: 2020-05-26 21:20:42
  * @FilePath: /RNLaboratory/src/components/common/GridView.js
  */
 import React, { PureComponent } from 'react';
 import {
     View,
-    Text,
     StyleSheet,
     FlatList,
-    ScrollView
 } from 'react-native';
 
 import { SCREEN_WIDTH } from '../../constants/layout';
@@ -29,7 +27,7 @@ export const GridView1 = (props) => {
     } = props;
     const filledData = fillArrayForUnite(data, numColumns, { _isFalse: true });
     return (
-        <View style={styles._demoWraper1(lineSpaceDistance, itemSpaceDistance, edgeSpaceDistance)}>
+        <View style={styles._demoWrap1(lineSpaceDistance, itemSpaceDistance, edgeSpaceDistance)}>
             {filledData.map((item, index) => {
                 if (item._isFalse) {
                     return <View key={Math.random()} style={[styles._demoItem1(numColumns, lineSpaceDistance, itemSpaceDistance, edgeSpaceDistance), { backgroundColor: 'transpranter' }]}></View>
@@ -46,7 +44,7 @@ export const GridView1 = (props) => {
 
 // 方式二：View + flex (一行一行的实现)
 export class GridView2 extends PureComponent {
-    
+
     render() {
         const {
             data,
@@ -55,10 +53,30 @@ export class GridView2 extends PureComponent {
             lineSpaceDistance = 0,
             itemSpaceDistance = 0,
             edgeSpaceDistance = 0,
+            keyExtractor = (item, index) => { return String(index) },
         } = this.props;
+        const filledData = fillArrayForUnite(data, numColumns, { _isFalse: true });
+        // 行数
+        let lineSum = Math.ceil(filledData.length / numColumns);
+        let lineFakeArray = Array(lineSum).fill('占位');
+
         return (
-            <View>
-                <Text>124</Text>
+            <View style={StyleSheet.flatten([styles._demoWrap2(itemSpaceDistance, lineSpaceDistance, edgeSpaceDistance)])}>
+                {lineFakeArray.map((item, lineNum) => {
+                    let start = lineNum * numColumns;
+                    let end = lineNum * numColumns + numColumns;
+                    return (
+                        <View key={lineNum} style={StyleSheet.flatten([styles._lineWrap(lineSpaceDistance)])}>
+                            {filledData.slice(start, end).map((item, index) => {
+                                return (
+                                    <View key={keyExtractor(item, index)} style={StyleSheet.flatten([styles._itemWrap(itemSpaceDistance)])}>
+                                        {!item._isFalse && renderItem({ item, index: lineNum * numColumns + index })}
+                                    </View>
+                                )
+                            })}
+                        </View>
+                    )
+                })}
             </View>
         )
     }
@@ -102,7 +120,7 @@ export const GridView3 = (props) => {
 
 const styles = StyleSheet.create({
     // 方式1
-    _demoWraper1: ((lineSpaceDistance, itemSpaceDistance, edgeSpaceDistance) => {
+    _demoWrap1: ((lineSpaceDistance, itemSpaceDistance, edgeSpaceDistance) => {
         return {
             marginTop: -lineSpaceDistance,
             paddingHorizontal: edgeSpaceDistance,
@@ -119,5 +137,23 @@ const styles = StyleSheet.create({
             width: (SCREEN_WIDTH - itemSpaceDistance * 2 - edgeSpaceDistance * 2) / numColumns,
         }
     }),
+    // 方式2
+    _demoWrap2: (itemSpaceDistance, lineSpaceDistance, edgeSpaceDistance) => ({
+        paddingHorizontal: edgeSpaceDistance,
+        marginTop: -lineSpaceDistance,
+        marginLeft: -itemSpaceDistance / 2,
+        marginRight: -itemSpaceDistance / 2,
+    }),
+    _lineWrap: (lineSpaceDistance) => ({
+        marginTop: lineSpaceDistance,
+        flexDirection: 'row',
+        flexWrap: 'nowrap',
+        justifyContent: 'space-between',
+    }),
+    _itemWrap: (itemSpaceDistance) => ({
+        flex: 1,
+        marginLeft: itemSpaceDistance / 2,
+        marginRight: itemSpaceDistance / 2,
+    })
 });
 
