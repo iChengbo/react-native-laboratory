@@ -2,7 +2,7 @@
  * @Author: iChengbo
  * @Date: 2020-05-11 22:24:26
  * @LastEditors: iChengbo
- * @LastEditTime: 2020-05-26 21:22:30
+ * @LastEditTime: 2020-05-31 13:31:11
  * @FilePath: /RNLaboratory/src/components/common/GridView.js
  */
 import React, { PureComponent } from 'react';
@@ -10,6 +10,7 @@ import {
     View,
     StyleSheet,
     FlatList,
+    Text,
 } from 'react-native';
 
 import { SCREEN_WIDTH } from '../../constants/layout';
@@ -20,7 +21,7 @@ export const GridView1 = (props) => {
     const {
         data,
         numColumns,
-        renderItem,
+        renderItem = () => { },
         lineSpaceDistance = 0,
         itemSpaceDistance = 0,
         edgeSpaceDistance = 0,
@@ -49,7 +50,7 @@ export class GridView2 extends PureComponent {
         const {
             data,
             numColumns,
-            renderItem,
+            renderItem = () => { },
             lineSpaceDistance = 0,
             itemSpaceDistance = 0,
             edgeSpaceDistance = 0,
@@ -87,7 +88,7 @@ export const GridView3 = (props) => {
     const {
         data,
         numColumns,
-        renderItem,
+        renderItem = () => { },
         lineSpaceDistance = 0,
         itemSpaceDistance = 0,
         edgeSpaceDistance = 0,

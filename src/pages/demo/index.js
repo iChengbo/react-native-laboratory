@@ -2,7 +2,7 @@
  * @Author: iChengbo
  * @Date: 2020-05-26 21:35:00
  * @LastEditors: iChengbo
- * @LastEditTime: 2020-05-26 21:59:29
+ * @LastEditTime: 2020-05-31 14:29:56
  * @FilePath: /RNLaboratory/src/pages/demo/index.js
  */
 import React, { PureComponent } from 'react';
@@ -10,14 +10,13 @@ import {
     View,
     Text,
     StyleSheet,
+    TouchableHighlight,
 } from 'react-native';
 
 import CustomHeader from '../../components/common/CustomeHeader';
 
 import { GridView2 } from '../../components/common/GridView';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 import COLORS from '../../constants/colors';
-
 
 const NUM_COLUMNS = 3;
 
@@ -48,7 +47,7 @@ class DemoIndex extends PureComponent {
                     renderItem={({ item, index }) => {
                         return (
                             <TouchableHighlight
-                                underlayColor={'#f40'}
+                                underlayColor={'blue'}
                                 onPress={() => this.props.navigation.navigate(item.screen)}
                             >
                                 <View style={styles._itemWrap}>

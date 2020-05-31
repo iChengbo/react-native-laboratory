@@ -1,10 +1,18 @@
 import React from 'react';
-import { Image, Dimensions } from 'react-native';
-import { createStackNavigator, TransitionSpecs, CardStyleInterpolators } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+    View,
+    Text,
+    Image,
+    StyleSheet,
+    TouchableOpacity,
+} from 'react-native';
 
-import { IMAGE } from '../constants/image';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
+
+import { isIphoneX } from '../utils/System';
 
 // 登录相关
 import Login from '../pages/Login';
@@ -17,6 +25,7 @@ import Profile from '../pages/slider/Profile';
 
 // TAB 页
 import Home from '../pages/Home';
+import Publish from '../pages/Publish';
 import Search from '../pages/Search';
 
 // 一般页面
@@ -57,13 +66,73 @@ const MainScreens = [
 
 const Tab = createBottomTabNavigator();
 
+const styles = StyleSheet.create({
+    btmTabWrap: {
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+        paddingBottom: isIphoneX() ? 34 : 0,
+    },
+    tabWrap: {
+        height: 50,
+        width: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+})
+
 // TabBar
 export const MainTabs = () => {
     return (
         <Tab.Navigator
             initialRouteName='Home'
-            tabBarOptions={{
-                activeTintColor: 'red'
+            tabBar={({ state, descriptors, navigation }) => {
+                return (
+                    <View style={styles.btmTabWrap}>
+                        {
+                            state.routes.map((route, index) => {
+
+                                const { options } = descriptors[route.key];
+                                const label =
+                                    options.tabBarLabel !== undefined
+                                        ? options.tabBarLabel
+                                        : options.title !== undefined
+                                            ? options.title
+                                            : route.name;
+                                const tabBarIcon = options.tabBarIcon;
+
+                                const isFocused = state.index === index;
+                                const onPress = () => {
+                                    if (index == 1) {
+                                        // TODO： 弹出发布
+                                        return null;
+                                    }
+                                    const event = navigation.emit({
+                                        type: 'tabPress',
+                                        target: route.key,
+                                        canPreventDefault: true,
+                                    });
+
+                                    if (!isFocused && !event.defaultPrevented) {
+                                        navigation.navigate(route.name);
+                                    }
+                                }
+
+                                return (
+                                    <TouchableOpacity
+                                        onPress={onPress}
+                                    >
+                                        <View style={StyleSheet.flatten([styles.tabWrap, { opacity: isFocused ? 1 : 0.4 }])}>
+                                            {tabBarIcon()}
+                                            <Text>{label}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                )
+                            })
+                        }
+                    </View >
+                )
             }}
         >
             <Tab.Screen
@@ -71,30 +140,28 @@ export const MainTabs = () => {
                 component={Home}
                 options={{
                     tabBarLabel: '首页',
-                    tabBarIcon: ({ color, size }) => (
-                        <Image
-                            source={IMAGE.ICON_USER_DEFAULT}
-                            resizeMode='contain'
-                            style={{ width: 20, height: 20 }}
-                        />
+                    tabBarIcon: () => (
+                        <MaterialCommunityIcons name="home" size={25} />
                     )
                 }}
-            ></Tab.Screen>
-            <Tab.Screen
-                name="Search"
-                component={Search}
+            />
+            <Tab.Screen name="Publish" component={Publish}
+                options={{
+                    tabBarLabel: '发布',
+                    tabBarIcon: () => (
+                        <MaterialCommunityIcons name="account-plus-outline" size={25} />
+                    )
+                }}
+            />
+            <Tab.Screen name="Search" component={Search}
                 options={{
                     tabBarLabel: '搜索',
-                    tabBarIcon: ({ color, size }) => (
-                        <Image
-                            source={IMAGE.ICON_USER_DEFAULT}
-                            resizeMode='contain'
-                            style={{ width: 20, height: 20 }}
-                        />
+                    tabBarIcon: () => (
+                        <MaterialCommunityIcons name="account" size={25} />
                     )
                 }}
-            ></Tab.Screen>
-        </Tab.Navigator>
+            />
+        </Tab.Navigator >
     )
 }
 
@@ -125,6 +192,7 @@ export const MainApp = () => {
                 MainScreens.map((screen) => {
                     return (
                         <Stack.Screen
+                            key={screen.name}
                             name={screen.name}
                             component={screen.component}
                         ></Stack.Screen>
