@@ -1,3 +1,10 @@
+/*
+ * @Author: iChengbo
+ * @Date: 2020-01-19 15:20:06
+ * @LastEditors: iChengbo
+ * @LastEditTime: 2020-05-31 12:48:55
+ * @FilePath: /RNLaboratory/src/components/common/CustomeHeader.js
+ */
 import React from 'react';
 
 import { Header, Left, Body, Right, Button, Icon, Title, Text, List, ListItem } from 'native-base';
@@ -8,15 +15,9 @@ export default class CustomHeader extends React.Component {
     return (
       <Header>
         <Left>
-          {
-            isHome ?
-              <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                <Icon name='menu' />
-              </Button> :
-              <Button transparent onPress={() => this.props.navigation.goBack()}>
-                <Icon name='arrow-back' />
-              </Button>
-          }
+          <Button transparent onPress={() => this.props.navigation.goBack()}>
+            <Icon name='arrow-back' />
+          </Button>
         </Left>
         <Body>
           <Title>{title}</Title>
